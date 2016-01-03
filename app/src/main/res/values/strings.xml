@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Playground</string>
+    <string name="header">Android Studio base project</string>
+</resources>
