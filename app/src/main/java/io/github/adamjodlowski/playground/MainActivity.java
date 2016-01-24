@@ -20,32 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        integerObservable.subscribe(integerObserver);
-
-        integerObservable
-                .map(new Func1<Integer, String>() {
-                    @Override
-                    public String call(Integer integer) {
-                        return Integer.toBinaryString(integer);
-                    }
-                })
-                .filter(new Func1<String, Boolean>() {
-                    @Override
-                    public Boolean call(String s) {
-                        return s.endsWith("1");
-                    }
-                })
-                .map(new Func1<String, Integer>() {
-                    @Override
-                    public Integer call(String s) {
-                        return Integer.parseInt(s, 2);
-                    }
-                })
-                .subscribe(integerObserver);
+        computeNumbersObservable.subscribe(integerObserver);
 
     }
-
-    Observable<Integer> integerObservable = Observable.just(4, 8, 15, 16, 23, 42);
 
     Observer<Integer> integerObserver = new Observer<Integer>() {
         @Override
@@ -63,5 +40,31 @@ public class MainActivity extends AppCompatActivity {
             Log.d("PLAYGROUND", "onNext: " + integer);
         }
     };
+
+    Observable<Integer> computeNumbersObservable = Observable.create(new Observable.OnSubscribe<Integer>() {
+        @Override
+        public void call(Subscriber<? super Integer> subscriber) {
+
+            int i = 0;
+
+            while (true) {
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    subscriber.onError(e); // report error
+                }
+
+                subscriber.onNext(i++); // emit data
+
+                if (i == 10) {
+                    break;
+                }
+
+            }
+
+            subscriber.onCompleted(); // indicate stream completion
+        }
+    });
 
 }
