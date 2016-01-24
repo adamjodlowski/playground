@@ -11,6 +11,7 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +20,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        integerObservable.subscribe(integerObserver);
+        integerObservable.subscribe(new Action1<Integer>() {
+            @Override
+            public void call(Integer integer) {
+                Log.d("PLAYGROUND", "call: " + integer);
+            }
+        });
 
     }
 
