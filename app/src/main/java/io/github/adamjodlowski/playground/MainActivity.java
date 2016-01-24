@@ -22,12 +22,26 @@ public class MainActivity extends AppCompatActivity {
 
         integerObservable.subscribe(integerObserver);
 
-        integerObservable.map(new Func1<Integer, Integer>() {
-            @Override
-            public Integer call(Integer integer) {
-                return integer * integer;
-            }
-        }).subscribe(integerObserver);
+        integerObservable
+                .map(new Func1<Integer, String>() {
+                    @Override
+                    public String call(Integer integer) {
+                        return Integer.toBinaryString(integer);
+                    }
+                })
+                .filter(new Func1<String, Boolean>() {
+                    @Override
+                    public Boolean call(String s) {
+                        return s.endsWith("1");
+                    }
+                })
+                .map(new Func1<String, Integer>() {
+                    @Override
+                    public Integer call(String s) {
+                        return Integer.parseInt(s, 2);
+                    }
+                })
+                .subscribe(integerObserver);
 
     }
 
