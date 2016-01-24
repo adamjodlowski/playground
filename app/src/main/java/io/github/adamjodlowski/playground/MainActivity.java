@@ -18,6 +18,7 @@ import rx.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +26,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textView = (TextView) findViewById(R.id.textView);
+        button = (Button) findViewById(R.id.button);
 
-        computeNumbersObservable
+        final Subscription subscription = computeNumbersObservable
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(integerObserver);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subscription.unsubscribe();
+            }
+        });
 
     }
 
