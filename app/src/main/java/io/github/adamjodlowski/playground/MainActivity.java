@@ -11,16 +11,25 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        computeNumbersObservable.subscribe(integerObserver);
+        textView = (TextView) findViewById(R.id.textView);
+
+        computeNumbersObservable
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(integerObserver);
 
     }
 
@@ -28,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCompleted() {
             Log.d("PLAYGROUND", "onCompleted");
+            textView.setText("stream completed");
         }
 
         @Override
@@ -38,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onNext(Integer integer) {
             Log.d("PLAYGROUND", "onNext: " + integer);
+            textView.setText(integer.toString());
         }
     };
 
