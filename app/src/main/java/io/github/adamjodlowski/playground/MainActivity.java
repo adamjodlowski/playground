@@ -1,6 +1,7 @@
 package io.github.adamjodlowski.playground;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,6 +20,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        TextInputLayout emailInput = (TextInputLayout) findViewById(R.id.input_email);
+        emailInput.setCounterEnabled(true);
+        emailInput.setCounterMaxLength(20);
+        emailInput.setErrorEnabled(true);
+        emailInput.setError("Email not provided");
     }
 
     @Override
