@@ -8,13 +8,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout
+    <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+            app:layout_widthPercent="80%"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
@@ -60,7 +60,7 @@
 
         </android.support.design.widget.TextInputLayout>
 
-    </RelativeLayout>
+    </android.support.percent.PercentRelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
