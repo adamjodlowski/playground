@@ -1,6 +1,7 @@
 package io.github.adamjodlowski.playground;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
         emailInput.setCounterMaxLength(20);
         emailInput.setErrorEnabled(true);
         emailInput.setError("Email not provided");
+
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fab.hide();
+            }
+        });
     }
 
     @Override

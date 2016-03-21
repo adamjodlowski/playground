@@ -51,7 +51,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Provide email address"/>
-        
+
     </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_dialog_alert"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="32dp"
+        app:fabSize="normal"/>
 
 </RelativeLayout>
