@@ -1,6 +1,7 @@
 package io.github.adamjodlowski.playground;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -30,13 +31,15 @@ public class MainActivity extends AppCompatActivity {
         emailInput.setErrorEnabled(true);
         emailInput.setError("Email not provided");
 
+        final CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Snackbar
-                    .make(v, "You clicked FAB", Snackbar.LENGTH_INDEFINITE)
+                    .make(coordinatorLayout, "You clicked FAB", Snackbar.LENGTH_INDEFINITE)
                     .setAction("Hide", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
